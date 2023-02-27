@@ -11,3 +11,22 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+li{
+  list-style-type: none;
+}
+a{
+  text-decoration: none;
+  color: rgb(12, 103, 152);
+  font-size: 22px;
+}
+a:hover{
+  color: aqua;
+}
+header > nav > ul {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.linkActivate{
+  border-bottom: 2px chocolate solid;
+}
