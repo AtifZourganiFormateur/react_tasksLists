@@ -74,7 +74,7 @@ const TasksListDetails = () => {
                                     <span>{task.amount}</span>
                                     <br/>
                                     <button onClick={()=>{handleDeleteTask(task.id)}}>delete tache {task.name}</button>
-                                    <NavLink to={'/'}>modifier la tâche</NavLink>
+                                    <NavLink to={`/liste/tache/${task.id}/update`}>modifier la tâche</NavLink>
                                 </li>
                         })}
                     </ul>

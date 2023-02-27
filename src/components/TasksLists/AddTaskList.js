@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import Header from '../Elements/Header';
 
 const AddTaskList = () => {
-
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-
     async function handleSubmit(e) {
         e.preventDefault();
         const response = await fetch('http://localhost:3003/taskslists', {
@@ -20,9 +18,8 @@ const AddTaskList = () => {
             window.location.href = '/liste';
         }else{
             console.log('une erreur');
-        }
-
-    }
+        };
+    };
     return (
         <div>
             <Header/>

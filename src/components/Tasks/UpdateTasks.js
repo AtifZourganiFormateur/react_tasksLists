@@ -11,6 +11,7 @@ const UpdateTasks = () => {
     const {taskId} = useParams();
     const [loading, setLoading] = useState(true)
 
+    //recuperation du task a update
     useEffect(() => {
         const fetchTask = async () => {
             try{
@@ -25,18 +26,31 @@ const UpdateTasks = () => {
         fetchTask();
     }, [taskId]);
 
+    //ecoute des changement sur les inputs
     const handleInputChange = (event) => {
         const {name, value} = event.target;
-        console.log(name);
-        console.log(value)
         setTask({...task, [name]: value})
     }
 
-    const handleSubmit = (event) => {
+    //Envoi au endpoint update des modifications
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        
+        //verification des data
+        const response = await fetch(`http://localhost:3003/tasks/${taskId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type' : 'application/json',
+            },
+            body: JSON.stringify({name: task.name, description: task.description, amount: task.amount})
+        });
+        if(response.ok){
+            await response.json();
+            window.location.href = `/liste/${task.articleId}`;
+        }else{
+            console.error('une erreur est survenu de manière aléatoire')
+        }
     }
-
+    //gestion des moments de chargement
     if(loading){
         return <p>en chargement</p>
     }
@@ -45,6 +59,7 @@ const UpdateTasks = () => {
         <div>
             <Header/>
             <main onSubmit={handleSubmit}>
+                {console.log(task.articleId)}
                 <h2>Update de la tache {task.name}, dans la liste de tache avec l'id {taskId}</h2>
                 <form >
                     <input type="text" name='name' value={task.name} onChange={handleInputChange} placeholder='le nom de la tache'/>
