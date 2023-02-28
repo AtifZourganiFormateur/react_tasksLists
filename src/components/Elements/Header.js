@@ -17,6 +17,12 @@ const Header = () => {
                     <li className={location.pathname === '/liste/new' ? 'linkActivate' : ''}>
                         <NavLink to={'/liste/new'}>Ajouter une liste de tâches</NavLink>
                     </li>
+                    <li className={location.pathname === '/register' ? 'linkActivate' : ''}>
+                        <NavLink to={'/register'}>S'enregistrer</NavLink>
+                    </li>
+                    <li className={location.pathname === '/login' ? 'linkActivate' : ''}>
+                        <NavLink to={'/login'}>Se Connecter</NavLink>
+                    </li>
                 </ul>
             </nav>
             <h1>

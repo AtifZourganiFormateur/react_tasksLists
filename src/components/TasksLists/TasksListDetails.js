@@ -66,6 +66,7 @@ const TasksListDetails = () => {
             <section>
                     <h2>{taskList.title}</h2>
                     <p>{taskList.description}</p>
+                    <NavLink to={'/'}>Modifier la liste {taskList.title}</NavLink>
                     <ul>
                         {taskList.Tasks.map((task) => {
                             return <li key={task.id}>
