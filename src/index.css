@@ -44,7 +44,9 @@ form{
 form input{
   margin: 12px;
 }
-
-.taskslistsContainer{
-  
+.inputFalse{
+  background-color: red;
+}
+.inputTrue{
+  background-color: green;
 }

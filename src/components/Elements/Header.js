@@ -23,6 +23,9 @@ const Header = () => {
                     <li className={location.pathname === '/login' ? 'linkActivate' : ''}>
                         <NavLink to={'/login'}>Se Connecter</NavLink>
                     </li>
+                    <li className={location.pathname === '/test' ? 'linkActivate' : ''}>
+                        <NavLink to={'/test'}>Test</NavLink>
+                    </li>
                 </ul>
             </nav>
             <h1>

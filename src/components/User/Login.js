@@ -5,8 +5,6 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const [token, setToken] = useState('');
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         try{
@@ -19,18 +17,20 @@ const Login = () => {
             });
             if(response.ok){
                 const data = await response.json();
-                setToken(data.token);
+                if(data.token){
+                    localStorage.setItem('token', data.token); 
+                }
                 window.location.href = '/liste';
             }
         }catch(e){
             console.error(e)
         }
     }
+
     return (
         <div>
             <Header/>
             <main>
-                {token}
                 <h2>Se connecter</h2>
                 <form onSubmit={handleSubmit}>
                     <input type="email" name="email" value={email} placeholder='email' onChange={(e)=>{setEmail(e.target.value)}} required />
