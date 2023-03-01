@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../Elements/Header';
+import Cookies from 'js-cookie';
 
 const UpdateTasks = () => {
     const [task, setTask] = useState({
@@ -14,8 +15,13 @@ const UpdateTasks = () => {
     //recuperation du task a update
     useEffect(() => {
         const fetchTask = async () => {
+            const token = Cookies.get('token');
             try{
-                const response = await fetch(`http://localhost:3003/tasks/${taskId}`);
+                const response = await fetch(`http://localhost:3003/tasks/${taskId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                        }
+                });
                 const data = await response.json();
                 setTask(data.data);
                 setLoading(false);

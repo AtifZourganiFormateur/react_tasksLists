@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Header from '../Elements/Header';
+import Cookies from 'js-cookie';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -8,6 +9,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try{
+            //Cookies.remove('token');
             const response = await fetch('http://localhost:3003/login', {
                 method: 'POST',
                 headers: {
@@ -17,10 +19,10 @@ const Login = () => {
             });
             if(response.ok){
                 const data = await response.json();
-                if(data.token){
-                    localStorage.setItem('token', data.token); 
-                }
-                window.location.href = '/liste';
+                Cookies.set('token', data.token)
+                const toto = Cookies.get('token');
+                console.log(data.token)
+                //window.location.href = '/liste';
             }
         }catch(e){
             console.error(e)

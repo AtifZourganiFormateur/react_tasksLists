@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import Header from '../Elements/Header';
+import Cookies from 'js-cookie';
 
 const AddTaskList = () => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     async function handleSubmit(e) {
         e.preventDefault();
+        const token = Cookies.get('token');
         const response = await fetch('http://localhost:3003/taskslists', {
             method: 'POST',
             headers: {
                 'Content-Type' : 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({title, description})
         });

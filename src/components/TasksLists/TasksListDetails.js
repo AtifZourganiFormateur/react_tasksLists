@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import Header from '../Elements/Header';
+import Cookies from 'js-cookie';
 
 const TasksListDetails = () => {
     const [taskList, setTaskList] = useState(null);
@@ -9,10 +10,15 @@ const TasksListDetails = () => {
     const [amount, setAmount] = useState('');
     const [description, setDescription] = useState('');
     const [taskListUpdated, setTaskListUpdated] = useState('');
+    const token = Cookies.get('token');
 
     useEffect(() => {
         async function fetchTaskList()  {
-            const response = await fetch(`http://localhost:3003/taskslists/${id}`);
+            const response = await fetch(`http://localhost:3003/taskslists/${id}`,{
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                    }
+            });
             const data = await response.json();
             setTaskList(data);
         }
@@ -32,7 +38,10 @@ const TasksListDetails = () => {
         try{
             const response = await fetch(`http://localhost:3003/taskslists/${id}/tasks`, {
                 method: 'POST',
-                headers: {'Content-Type': 'application/json'},
+                headers: {
+                    'Content-Type': 'application/json',
+                    'authorization': `Bearer ${token}`
+                },
                 body: JSON.stringify({name, description, amount})
             })
             const data = await response.json();
@@ -49,6 +58,10 @@ const TasksListDetails = () => {
     async function handleDeleteTask(taskId){
         const response = await fetch(`http://localhost:3003/tasks/${taskId}`, {
             method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${token}`
+            },
         })
         const data = await response.json();
         console.log(data);
